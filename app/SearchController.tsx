@@ -16,7 +16,7 @@ export async function Search(projects: project[], searchText: string) {
     }
     return output;
 }
-export function SearchController({projects}: {projects: project[]}) {
+export function SearchController() {
 
     const [searchText, setSearchText] = useState("_");
 
