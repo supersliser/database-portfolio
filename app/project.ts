@@ -8,9 +8,13 @@ export class project {
     id: number;
     name: string;
     created: Date;
-    constructor(id: number, name: string, createdDate: Date) {
+    logoLink : string
+    bgImageLink : string
+    constructor(id: number, name: string, createdDate: Date, logo: string, bgImage: string) {
         this.id = id;
         this.name = name;
         this.created = createdDate;
+        this.logoLink = logo;
+        this.bgImageLink = bgImage;
     }
 }

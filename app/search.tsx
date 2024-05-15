@@ -19,6 +19,7 @@ const SearchTextDom = styled.p`
 `
 
 const OutlineItem = styled.div`
+        background-color: #131121;
         margin: 1rem;
         border-radius: 35px;
         border-width: 3px;
@@ -41,7 +42,7 @@ export default function SearchBox({ searchText, setSearchText }: { searchText: s
             !focussed ?
                 <SearchTextDom>Search</SearchTextDom>
                 :
-                <form><SearchInputBox id="SearchInput" name="SearchInput" type="text" onBlur={() => setFocussed(false)} onInput={(v) => setSearchText(v.target.value)} autoFocus={true} value={searchText == "_" ? "" : searchText}></SearchInputBox></form>
+                <SearchInputBox id="SearchInput" name="SearchInput" type="text" onBlur={() => setFocussed(false)} onChange={v => setSearchText(v.target.value)} autoFocus={true} value={searchText == "_" ? "" : searchText}></SearchInputBox>
         }
     </OutlineItem>
 }
