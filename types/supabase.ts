@@ -11,18 +11,24 @@ export type Database = {
     Tables: {
       projects: {
         Row: {
+          bgImage: string
           created: string
           id: number
+          logoLink: string
           title: string
         }
         Insert: {
+          bgImage?: string
           created: string
           id?: number
+          logoLink?: string
           title: string
         }
         Update: {
+          bgImage?: string
           created?: string
           id?: number
+          logoLink?: string
           title?: string
         }
         Relationships: []

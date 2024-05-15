@@ -1,34 +1,20 @@
-import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { Database, Tables } from "@/types/supabase";
+'use client'
+import { SupabaseClient } from "@supabase/supabase-js";
+import { Database, Tables, Enums } from "@/types/supabase";
+import { useCallback, useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
 
 export class project {
     id: number;
     name: string;
     created: Date;
-    constructor(id: number, name: string, createdDate: Date) {
+    logoLink : string
+    bgImageLink : string
+    constructor(id: number, name: string, createdDate: Date, logo: string, bgImage: string) {
         this.id = id;
         this.name = name;
         this.created = createdDate;
+        this.logoLink = logo;
+        this.bgImageLink = bgImage;
     }
-}
-
-export async function getProjects(supabase: SupabaseClient) {
-    var projects: project[] = [];
-    const { data, error } = await supabase.from("projects")
-        .select("*")
-        .order("created", { ascending: false });
-
-    if (error) {
-        console.log(error);
-        return;
-    }
-    console.log(data);
-    data.forEach((element) => {
-        console.log(element);
-        projects.push(
-            new project(element["id"], element["title"], element["created"])
-        );
-    });
-
-    return projects;
 }
