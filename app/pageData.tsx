@@ -40,7 +40,7 @@ export default function PageData({ projects, activeProject }: { projects: projec
                             </p>
                             : <></>}
                         {data.image != null && data.image != "" ?
-                            <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}><Image key={data.image} src={data.image} alt={data.text} width={500} height={500}></Image></div>
+                            <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}><img width={500} key={data.image} src={data.image} alt={data.text}></img></div>
                             : <></>}
                     </div>
                 )));

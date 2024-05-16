@@ -38,7 +38,7 @@ export default function ProjectList({projects, activeProject, setActiveProject}:
             }
         }
     }
-    return <ul onWheel={handleScroll} style={{ width: "100%", minHeight: "100%", backgroundAttachment: "fixed", backgroundImage: "linear-gradient(to right, rgba(19, 17, 33, 1) 40%, rgba(19, 17, 33, 0))", position: "absolute", top: 0, left: 0 }}>{output}</ul>;
+    return <ul onWheel={handleScroll} style={{ zIndex: -10, width: "100%", minHeight: "100%", backgroundAttachment: "fixed", backgroundImage: "linear-gradient(to right, rgba(19, 17, 33, 1) 40%, rgba(19, 17, 33, 0))", position: "absolute", top: 0, left: 0 }}>{output}</ul>;
 }
 
 function ProjectDateItem({ month, year, active }: { month: string, year: number, active: boolean }) {

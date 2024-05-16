@@ -28,13 +28,13 @@ export default function Home() {
     }
     fetchData();
     setLoading(false);
-  }, []);
+  }, [window.innerHeight]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  return (
+  return document.documentElement.clientWidth < 1100 ? <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", width: "100vw" }}>Please rotate your device to be in landscape mode and refresh</div> : (
     <main style={{ backgroundImage: "url(" + projects[activeProject].bgImageLink + ")", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "right", backgroundColor: "argb(0,0,0,0)", position: "absolute", top: 0, left: 0, right: 0, zIndex: -20, minHeight: "100vh" }}>
       <SearchController searchText={searchText} setSearchText={setSearchText}></SearchController>
       <ProjectList projects={Search(projects, searchText)} activeProject={activeProject} setActiveProject={setActiveProject}></ProjectList>
