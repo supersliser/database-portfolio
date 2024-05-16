@@ -11,6 +11,7 @@ export type Database = {
     Tables: {
       projectPageTextData: {
         Row: {
+          continuous: boolean
           image: string | null
           iscaption: boolean
           istitle: boolean
@@ -22,6 +23,7 @@ export type Database = {
           textaboveimage: boolean
         }
         Insert: {
+          continuous?: boolean
           image?: string | null
           iscaption?: boolean
           istitle?: boolean
@@ -33,6 +35,7 @@ export type Database = {
           textaboveimage?: boolean
         }
         Update: {
+          continuous?: boolean
           image?: string | null
           iscaption?: boolean
           istitle?: boolean

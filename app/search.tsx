@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styled from "styled-components"
+import { motion } from "framer-motion";
 
 const SearchInputBox = styled.input`
     width: 100%;
@@ -37,13 +38,27 @@ const OutlineItem = styled.div`
 export default function SearchBox({ searchText, setSearchText }: { searchText: string, setSearchText: (v: string) => void }) {
     const [focussed, setFocussed] = useState(false);
 
-    return <OutlineItem onClick={() => setFocussed(true)}>
+    return <motion.div style={{
+        backgroundColor: "#131121",
+        margin: "1rem",
+        borderRadius: "35px",
+        borderWidth: "3px",
+        borderStyle: "solid",
+        borderColor: "white",
+        padding: "1rem",
+        paddingLeft: "2rem",
+        paddingRight: "2rem",
+        position: "absolute",
+        right: "5%",
+        top: "2%",
+        zIndex: "10",
+    }} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setFocussed(true)}>
         {
             !focussed ?
-                <SearchTextDom>Search</SearchTextDom>
+                <p style={{ fontSize: "1.5rem", color: "white" }}>Search</p>
                 :
                 <SearchInputBox id="SearchInput" name="SearchInput" type="text" onBlur={() => setFocussed(false)} onChange={v => setSearchText(v.target.value)} autoFocus={true} value={searchText == "_" ? "" : searchText}></SearchInputBox>
         }
-    </OutlineItem>
+    </motion.div>
 }
 
