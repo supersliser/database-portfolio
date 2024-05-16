@@ -1,9 +1,7 @@
 'use client'
 
-import { act, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { project } from "./project";
-import { SupabaseClient } from "@supabase/supabase-js";
-import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 
 export default function ProjectList({projects, activeProject, setActiveProject}: {projects: project[], activeProject: number, setActiveProject: any}) {
@@ -40,7 +38,7 @@ export default function ProjectList({projects, activeProject, setActiveProject}:
             }
         }
     }
-    return <ul onWheel={handleScroll} style={{ width: "80%", minHeight: "100vh", backgroundImage: "linear-gradient(to right,rgba(0, 12, 103, 1), rgba(0, 8, 150, 0))", position: "absolute", top: 0, left: 0 }}>{output}</ul>;
+    return <ul onWheel={handleScroll} style={{ width: "100%", minHeight: "100vh", backgroundImage: "linear-gradient(to right, rgba(19, 17, 33, 1) 40%, rgba(19, 17, 33, 0))", position: "absolute", top: 0, left: 0 }}>{output}</ul>;
 }
 
 function ProjectDateItem({ month, year, active }: { month: string, year: number, active: boolean }) {

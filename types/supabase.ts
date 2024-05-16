@@ -9,23 +9,67 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      projectPageTextData: {
+        Row: {
+          image: string | null
+          iscaption: boolean
+          istitle: boolean
+          linkdestination: string | null
+          linkplaceholder: string | null
+          ordering: number
+          projectid: number
+          text: string | null
+          textaboveimage: boolean
+        }
+        Insert: {
+          image?: string | null
+          iscaption?: boolean
+          istitle?: boolean
+          linkdestination?: string | null
+          linkplaceholder?: string | null
+          ordering?: number
+          projectid: number
+          text?: string | null
+          textaboveimage?: boolean
+        }
+        Update: {
+          image?: string | null
+          iscaption?: boolean
+          istitle?: boolean
+          linkdestination?: string | null
+          linkplaceholder?: string | null
+          ordering?: number
+          projectid?: number
+          text?: string | null
+          textaboveimage?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projectPageTextData_projectid_fkey"
+            columns: ["projectid"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
-          bgImage: string
+          bgImageLink: string
           created: string
           id: number
           logoLink: string
           title: string
         }
         Insert: {
-          bgImage?: string
+          bgImageLink?: string
           created: string
           id?: number
           logoLink?: string
           title: string
         }
         Update: {
-          bgImage?: string
+          bgImageLink?: string
           created?: string
           id?: number
           logoLink?: string

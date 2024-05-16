@@ -6,13 +6,15 @@ import { createClient } from "@/utils/supabase/client";
 import { Database } from "@/types/supabase";
 import { useEffect, useState } from "react";
 import { project } from "./project";
+import PageData from "./pageData";
 
 export default function Home() {
     const supabase = createClient();
 
-  const [projects, setProjects] = useState([new project(0, "", new Date(), "", "")]);
+  const [projects, setProjects] = useState([new project(0, "", new Date(0, 0, 0, 0, 0, 0, 0), "", "")]);
   const [searchText, setSearchText] = useState("");
   const [activeProject, setActiveProject] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,14 +26,19 @@ export default function Home() {
         setProjects(data.map((projectData) => new project(projectData.id, projectData.title, new Date(projectData.created), projectData.logoLink, projectData.bgImageLink)));
       }
     }
-
     fetchData();
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main style={{backgroundImage: "url("+projects[activeProject].bgImageLink+")", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "right", position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "#131121", zIndex: -20, overflow: "hidden"}}>
       <SearchController searchText={searchText} setSearchText={setSearchText}></SearchController>
       <ProjectList projects={Search(projects, searchText)} activeProject={activeProject} setActiveProject={setActiveProject}></ProjectList>
+      <PageData projects={projects} activeProject={activeProject}></PageData>
     </main>
   );
 }
