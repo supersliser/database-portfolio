@@ -50,7 +50,7 @@ export default function PageData({ projects, activeProject }: { projects: projec
         fetchData();
     }, [activeProject]);
 
-    return <ul key={"ef u"} style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "start", gap: "1rem", position: "relative", top: "0%", marginTop: "15%", left: "35%", width: "65%", minHeight: "100vh", backgroundColor: "rgba(0, 0, 0, 0.0)", backgroundAttachment: "fixed", marginBottom: "5rem" }}>
+    return <ul key={"ef u"} style={{ display: "flex", flexDirection: "column", justifyContent: "start", alignItems: "start", gap: "1rem", position: "relative", top: "0%", marginTop: "15%", left: "35%", width: "65%", minHeight: "100vh", backgroundColor: "rgba(0, 0, 0, 0.0)", backgroundAttachment: "fixed", marginBottom: "5rem" }}>
         {output.sort((a, b) => a.order - b.order).map((item) => item.content)}
     </ul>
 }
