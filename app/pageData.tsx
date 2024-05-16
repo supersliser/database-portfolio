@@ -30,13 +30,12 @@ export default function PageData({ projects, activeProject }: { projects: projec
             if (err) {
                 console.error(err);
             } else {
-                console.log(data);
                 setOutput(data.map((data) => new outputItem(data.ordering,
-                    <div key={data.ordering} style={{ display: "flex", flexDirection: data.textaboveimage ? "column" : "column-reverse", justifyContent: "start", alignItems: "start" }}>
+                    <div key={data.ordering} style={{ display: "flex", flexDirection: data.textaboveimage ? "column" : "column-reverse", justifyContent: "center", alignItems: "start" }}>
                         {data.text != null ?
-                            <p style={{ color: "white", fontSize: data.iscaption ? "0.75rem" : data.istitle ? "2.5em" : "1.25rem" }} key={data.text}>
+                            <p style={{ color: "white", marginTop: data.istitle ? "3rem" : data.continuous ? "-0.5rem" :"0.5rem", marginBottom: data.continuous ? "-0.5rem" : "0.5rem", fontSize: data.iscaption ? "0.75rem" : data.istitle ? "2.5em" : "1.25rem" }} key={data.text}>
                                 {data.linkdestination ?
-                                    <div><span>{data.text.split("{link}")[0]}</span><Link href={data.linkdestination}>{data.linkplaceholder}</Link><span>{data.text.split("<link>")[1]}</span></div>
+                                    <div><span>{data.text.split("{link}")[0]}</span><Link style={{ color: "green" }} href={data.linkdestination}>{data.linkplaceholder}</Link><span>{data.text.split("{link}")[1]}</span></div>
                                     : data.text}
                             </p>
                             : <></>}
@@ -51,7 +50,7 @@ export default function PageData({ projects, activeProject }: { projects: projec
         fetchData();
     }, [activeProject]);
 
-    return <ul key={"ef u"} style={{ display: "flex", flexDirection: "column", justifyContent: "start", alignItems: "start", gap: "1rem", overflowY: "auto", position: "absolute", top: "15%", left: "35%", width: "65%" }}>
+    return <ul key={"ef u"} style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "start", gap: "1rem", position: "relative", top: "0%", marginTop: "10%", left: "35%", width: "65%", backgroundColor: "rgba(0, 0, 0, 0.0)", backgroundAttachment: "fixed", marginBottom: "5rem" }}>
         {output.sort((a, b) => a.order - b.order).map((item) => item.content)}
     </ul>
 }

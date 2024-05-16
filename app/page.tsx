@@ -35,7 +35,7 @@ export default function Home() {
   }
 
   return (
-    <main style={{backgroundImage: "url("+projects[activeProject].bgImageLink+")", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "right", position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "#131121", zIndex: -20, overflow: "hidden"}}>
+    <main style={{ backgroundImage: "url(" + projects[activeProject].bgImageLink + ")", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "right", backgroundColor: "argb(0,0,0,0)", position: "absolute", top: 0, left: 0, right: 0, zIndex: -20, minHeight: "100vh" }}>
       <SearchController searchText={searchText} setSearchText={setSearchText}></SearchController>
       <ProjectList projects={Search(projects, searchText)} activeProject={activeProject} setActiveProject={setActiveProject}></ProjectList>
       <PageData projects={projects} activeProject={activeProject}></PageData>
