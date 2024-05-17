@@ -12,34 +12,66 @@ import PageData from "./pageData";
 export default function Home() {
   const supabase = createClient();
 
-  const [projects, setProjects] = useState([new project(0, "", new Date(0, 0, 0, 0, 0, 0, 0), "", "")]);
+  const [projects, setProjects] = useState([new project(0, "", new Date(0, 0, 0, 0, 0, 0, 0), "", "", true)]);
   const [searchText, setSearchText] = useState("");
   const [activeProject, setActiveProject] = useState(0);
   const [loading, setLoading] = useState(true);
   const [orderBy, setOrderBy] = useState("date");
   const [orderDir, setOrderDir] = useState("desc");
-  const [tags, setTags] = useState([new tagData("Date", true)]);
+  const [tags, setTags] = useState([new tagData("Date", true, -1)]);
+  const [gotTags, setGotTags] = useState(false);
 
 
   useEffect(() => {
     const fetchData = async () => {
+
+      if (!gotTags) {
+        const { data: tagsint, error: err3 } = await supabase.from("tags").select();
+        if (err3) {
+          console.error(err3);
+        } else {
+          setTags(tagsint.map((tagDataa) => new tagData(tagDataa.name, true, tagDataa.id)));
+        }
+        setGotTags(true);
+      }
+
+
+      var dataIgnore: number[] = [];
       const { data, error: err } = await supabase.from("projects").select().order(orderBy == "date" ? "created" : "title", { ascending: orderDir == "asc" });
       if (err) {
         console.error(err);
       } else {
-        setProjects(data.map((projectData) => new project(projectData.id, projectData.title, new Date(projectData.created), projectData.logoLink, projectData.bgImageLink)));
+        for (var i = 0; i < data.length; i++) {
+          const { data: tagsData, error: tagsErr } = await supabase.from("projecttags").select().eq("projectid", data[i].id);
+          if (tagsErr) {
+            console.error(tagsErr);
+          } else {
+            var temp = 0;
+            for (var j = 0; j < tagsData.length; j++) {
+              for (var k = 0; k < tags.length; k++) {
+                if (tagsData[j].tagid == tags[k].id && tags[k].active == false) {
+                  temp++;
+                }
+              }
+            }
+            if (temp == tagsData.length) {
+              dataIgnore.push(data[i].id);
+            }
+          }
+        }
+        setProjects(data.map((projectData) => new project(projectData.id, projectData.title, new Date(projectData.created), projectData.logoLink, projectData.bgImageLink, !dataIgnore.includes(projectData.id))));
       }
     }
     fetchData();
     setLoading(false);
-  }, [window.innerHeight, orderBy, orderDir, tags]);
+  }, [orderBy, orderDir, tags]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return document.documentElement.clientWidth < document.documentElement.clientHeight ? <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", width: "100vw" }}>Please rotate your device to be in landscape mode and refresh</div> :
-    <main style={{ backgroundImage: "url(" + projects[activeProject].bgImageLink + ")", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "right", backgroundColor: "argb(0,0,0,0)", position: "absolute", top: 0, left: 0, right: 0, zIndex: -20, minHeight: "100vh" }}>
+    <main style={{ backgroundImage: "url(" + projects[activeProject].bgImageLink + ")", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundSize: "auto 100%", backgroundPosition: "right", backgroundColor: "argb(0,0,0,0)", position: "absolute", top: 0, left: 0, right: 0, zIndex: -20, minHeight: "100vh" }}>
       <div style={{ width: "100vw", height: "100vh", position: "fixed", top: 0, zIndex: -10, backgroundImage: "linear-gradient(to right, rgba(19, 17, 33, 1) 40%, rgba(19, 17, 33, 0))", }}>
         <SearchController tags={tags} setTags={setTags} orderBy={orderBy} setOrderBy={setOrderBy} orderDir={orderDir} setOrderDir={setOrderDir} searchText={searchText} setSearchText={setSearchText}></SearchController>
         <ProjectList orderBy={orderBy} projects={Search(projects, searchText)} activeProject={activeProject} setActiveProject={setActiveProject}></ProjectList>

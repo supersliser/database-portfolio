@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { project } from "./project";
 import Image from "next/image";
 
-export default function ProjectList({ projects, activeProject, setActiveProject, orderBy }: { projects: project[], activeProject: number, setActiveProject: any, orderBy: string}) {
+export default function ProjectList({ projects, activeProject, setActiveProject, orderBy }: { projects: project[], activeProject: number, setActiveProject: any, orderBy: string }) {
     var output = [];
     var lastDate = new Date(0, 0, 0, 0, 0, 0, 0);
     var lastLetter = "";
@@ -17,17 +17,23 @@ export default function ProjectList({ projects, activeProject, setActiveProject,
 
     for (var i = activeProject; i < projects.length; i++) {
         if (orderBy == "date") {
-            if (lastDate.getMonth() != new Date(projects[i].created).getMonth()) {
-                lastDate = new Date(projects[i].created);
-                output.push(<ProjectDateItem key={i + 0.1} month={lastDate.toLocaleString("default", { month: "long" })} year={lastDate.getFullYear()} active={i == activeProject}></ProjectDateItem>);
+            if (projects[i].active) {
+                if (lastDate.getMonth() != new Date(projects[i].created).getMonth()) {
+                    lastDate = new Date(projects[i].created);
+                    output.push(<ProjectDateItem key={i + 0.1} month={lastDate.toLocaleString("default", { month: "long" })} year={lastDate.getFullYear()} active={i == activeProject}></ProjectDateItem>);
+                }
+
+                output.push(<ProjectListItem logo={projects[i].logoLink} i={i} last={i == projects.length - 1} onClick={selectSpecificObject} key={i} active={i == activeProject} name={projects[i].name}></ProjectListItem>);
             }
-            output.push(<ProjectListItem logo={projects[i].logoLink} i={i} last={i == projects.length - 1} onClick={selectSpecificObject} key={i} active={i == activeProject} name={projects[i].name}></ProjectListItem>);
         } else if (orderBy == "name") {
-            if (lastLetter != projects[i].name[0]) {
-                lastLetter = projects[i].name[0];
-                output.push(<ProjectLetterItem key={i + 0.1} letter={lastLetter} active={i == activeProject}></ProjectLetterItem>);
+            if (projects[i].active) {
+
+                if (lastLetter != projects[i].name[0]) {
+                    lastLetter = projects[i].name[0];
+                    output.push(<ProjectLetterItem key={i + 0.1} letter={lastLetter} active={i == activeProject}></ProjectLetterItem>);
+                }
+                output.push(<ProjectListItem logo={projects[i].logoLink} i={i} last={i == projects.length - 1} onClick={selectSpecificObject} key={i} active={i == activeProject} name={projects[i].name}></ProjectListItem>);
             }
-            output.push(<ProjectListItem logo={projects[i].logoLink} i={i} last={i == projects.length - 1} onClick={selectSpecificObject} key={i} active={i == activeProject} name={projects[i].name}></ProjectListItem>);
         }
     }
 
