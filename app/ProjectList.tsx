@@ -10,7 +10,6 @@ export default function ProjectList({ projects, activeProject, setActiveProject,
     var lastDate = new Date(0, 0, 0, 0, 0, 0, 0);
     var lastLetter = "";
 
-
     const selectSpecificObject = (item: number) => {
         setActiveProject(item);
     }

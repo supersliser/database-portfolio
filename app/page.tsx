@@ -12,7 +12,7 @@ import PageData from "./pageData";
 export default function Home() {
   const supabase = createClient();
 
-  const [projects, setProjects] = useState([new project(0, "", new Date(0, 0, 0, 0, 0, 0, 0), "", "", true)]);
+  const [projects, setProjects] = useState([new project(0, "", new Date(0, 0, 0, 0, 0, 0, 0), "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png", true)]);
   const [searchText, setSearchText] = useState("");
   const [activeProject, setActiveProject] = useState(0);
   const [loading, setLoading] = useState(true);
