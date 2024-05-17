@@ -37,9 +37,8 @@ const OutlineItem = styled.div`
         z-index: 10;
     `;
 
-export default function SearchBox({ searchText, setSearchText, orderBy, setOrderBy, orderDir, setOrderDir, tags, setTags }: { searchText: string, setSearchText: (v: string) => void, orderBy: string, setOrderBy: (v: string) => void, orderDir: string, setOrderDir: (v: string) => void, tags: tagData[], setTags: (v: tagData[]) => void }) {
+export default function SearchBox({ searchText, setSearchText, orderBy, setOrderBy, orderDir, setOrderDir, tags, setTags, searchOptionsVisible, setSearchOptionsVisible }: { searchText: string, setSearchText: (v: string) => void, orderBy: string, setOrderBy: (v: string) => void, orderDir: string, setOrderDir: (v: string) => void, tags: tagData[], setTags: (v: tagData[]) => void , searchOptionsVisible: boolean, setSearchOptionsVisible: (v: boolean) => void }) {
     const [focussed, setFocussed] = useState(false);
-    const [searchOptionsVisible, setSearchOptionsVisible] = useState(false);
 
     return <div style={{margin: "1rem",position: "absolute", right: "1.5%", top: "2%", zIndex: "10", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", }}>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setFocussed(true)} style={{

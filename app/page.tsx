@@ -20,6 +20,8 @@ export default function Home() {
   const [orderDir, setOrderDir] = useState("desc");
   const [tags, setTags] = useState([new tagData("Date", true, -1)]);
   const [gotTags, setGotTags] = useState(false);
+  const [searchOptionsVisible, setSearchOptionsVisible] = useState(false);
+
 
 
   useEffect(() => {
@@ -64,7 +66,7 @@ export default function Home() {
     }
     fetchData();
     setLoading(false);
-  }, [orderBy, orderDir, tags]);
+  }, [orderBy, orderDir, searchOptionsVisible]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -73,7 +75,7 @@ export default function Home() {
   return document.documentElement.clientWidth < document.documentElement.clientHeight ? <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", width: "100vw" }}>Please rotate your device to be in landscape mode and refresh</div> :
     <main style={{ backgroundImage: "url(" + projects[activeProject].bgImageLink + ")", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat", backgroundSize: "auto 100%", backgroundPosition: "right", backgroundColor: "argb(0,0,0,0)", position: "absolute", top: 0, left: 0, right: 0, zIndex: -20, minHeight: "100vh" }}>
       <div style={{ width: "100vw", height: "100vh", position: "fixed", top: 0, zIndex: -10, backgroundImage: "linear-gradient(to right, rgba(19, 17, 33, 1) 40%, rgba(19, 17, 33, 0))", }}>
-        <SearchController tags={tags} setTags={setTags} orderBy={orderBy} setOrderBy={setOrderBy} orderDir={orderDir} setOrderDir={setOrderDir} searchText={searchText} setSearchText={setSearchText}></SearchController>
+        <SearchController searchOptionsVisible={searchOptionsVisible} setSearchOptionsVisible={setSearchOptionsVisible} tags={tags} setTags={setTags} orderBy={orderBy} setOrderBy={setOrderBy} orderDir={orderDir} setOrderDir={setOrderDir} searchText={searchText} setSearchText={setSearchText}></SearchController>
         <ProjectList orderBy={orderBy} projects={Search(projects, searchText)} activeProject={activeProject} setActiveProject={setActiveProject}></ProjectList>
         <PageData projects={Search(projects, searchText)} activeProject={activeProject}></PageData>
       </div>

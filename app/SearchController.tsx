@@ -17,6 +17,6 @@ export function Search(projects: project[], searchText: string) {
     }
     return output;
 }
-export function SearchController({searchText, setSearchText, orderBy, setOrderBy, orderDir, setOrderDir, tags, setTags}: {searchText: string, setSearchText: (v: string) => void, orderBy: string, setOrderBy: (v: string) => void, orderDir: string, setOrderDir: (v: string) => void, tags: tagData[], setTags: (v: tagData[]) => void}) {
-    return <SearchBox tags={tags} setTags={setTags} orderBy={orderBy} setOrderBy={setOrderBy} orderDir={orderDir} setOrderDir={setOrderDir} searchText={searchText} setSearchText={setSearchText}></SearchBox>
+export function SearchController({searchText, setSearchText, orderBy, setOrderBy, orderDir, setOrderDir, tags, setTags, searchOptionsVisible, setSearchOptionsVisible}: {searchText: string, setSearchText: (v: string) => void, orderBy: string, setOrderBy: (v: string) => void, orderDir: string, setOrderDir: (v: string) => void, tags: tagData[], setTags: (v: tagData[]) => void, searchOptionsVisible: boolean, setSearchOptionsVisible: (v: boolean) => void}) {
+    return <SearchBox tags={tags} setTags={setTags} orderBy={orderBy} setOrderBy={setOrderBy} orderDir={orderDir} setOrderDir={setOrderDir} searchText={searchText} setSearchText={setSearchText} searchOptionsVisible={searchOptionsVisible} setSearchOptionsVisible={setSearchOptionsVisible}></SearchBox>
 }
