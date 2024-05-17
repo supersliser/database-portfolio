@@ -80,6 +80,51 @@ export type Database = {
         }
         Relationships: []
       }
+      projecttags: {
+        Row: {
+          projectid: number
+          tagid: number
+        }
+        Insert: {
+          projectid: number
+          tagid: number
+        }
+        Update: {
+          projectid?: number
+          tagid?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projecttags_projectid_fkey"
+            columns: ["projectid"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projecttags_tagid_fkey"
+            columns: ["tagid"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tags: {
+        Row: {
+          id: number
+          name: string
+        }
+        Insert: {
+          id?: number
+          name: string
+        }
+        Update: {
+          id?: number
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
