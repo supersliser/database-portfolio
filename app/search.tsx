@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styled from "styled-components"
 import { motion } from "framer-motion";
-import SearchOptions from "./SearchOptions";
+import SearchOptions, { tagData } from "./SearchOptions";
 
 const SearchInputBox = styled.input`
     width: 100%;
@@ -36,7 +36,7 @@ const OutlineItem = styled.div`
         z-index: 10;
     `;
 
-export default function SearchBox({ searchText, setSearchText, orderBy, setOrderBy, orderDir, setOrderDir }: { searchText: string, setSearchText: (v: string) => void, orderBy: string, setOrderBy: (v: string) => void, orderDir: string, setOrderDir: (v: string) => void }) {
+export default function SearchBox({ searchText, setSearchText, orderBy, setOrderBy, orderDir, setOrderDir, tags, setTags }: { searchText: string, setSearchText: (v: string) => void, orderBy: string, setOrderBy: (v: string) => void, orderDir: string, setOrderDir: (v: string) => void, tags: tagData[], setTags: (v: tagData[]) => void }) {
     const [focussed, setFocussed] = useState(false);
     const [searchOptionsVisible, setSearchOptionsVisible] = useState(false);
 
@@ -73,7 +73,7 @@ export default function SearchBox({ searchText, setSearchText, orderBy, setOrder
         }}><img src="https://cdn.discordapp.com/attachments/1240362204310671420/1240817414065623091/settings-cog-svgrepo-com.png?ex=6647f0c4&is=66469f44&hm=d6b564679677aa32764e4571e16545fff91fce90a6a78169cd8bc12ffde10d14&" alt="search settings" height="25px"></img>
         </motion.div>
         {
-            searchOptionsVisible ? <SearchOptions setVisible={setSearchOptionsVisible} orderBy={orderBy} setOrderBy={setOrderBy} orderDir={orderDir} setOrderDir={setOrderDir}></SearchOptions> : null
+            searchOptionsVisible ? <SearchOptions tags={tags} setTags={setTags} setVisible={setSearchOptionsVisible} orderBy={orderBy} setOrderBy={setOrderBy} orderDir={orderDir} setOrderDir={setOrderDir}></SearchOptions> : null
         }
     </div>
 }
