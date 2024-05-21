@@ -58,27 +58,44 @@ export type Database = {
       }
       projects: {
         Row: {
+          bgimage: string | null
           bgImageLink: string
+          bgimagename: string | null
           created: string
           id: number
           logoLink: string
+          logoname: string | null
           title: string
         }
         Insert: {
+          bgimage?: string | null
           bgImageLink?: string
+          bgimagename?: string | null
           created: string
           id?: number
           logoLink?: string
+          logoname?: string | null
           title: string
         }
         Update: {
+          bgimage?: string | null
           bgImageLink?: string
+          bgimagename?: string | null
           created?: string
           id?: number
           logoLink?: string
+          logoname?: string | null
           title?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "projects_bgimage_fkey"
+            columns: ["bgimage"]
+            isOneToOne: false
+            referencedRelation: "objects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       projecttags: {
         Row: {

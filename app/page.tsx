@@ -61,7 +61,13 @@ export default function Home() {
             }
           }
         }
-        setProjects(data.map((projectData) => new project(projectData.id, projectData.title, new Date(projectData.created), projectData.logoLink, projectData.bgImageLink, !dataIgnore.includes(projectData.id))));
+        var tempProjects: project[] = [];
+        setProjects(data.map((dataitem) =>  {
+          var { data: logo } = supabase.storage.from("Icons").getPublicUrl(dataitem.logoname)
+          var { data: background } = supabase.storage.from("Background").getPublicUrl(dataitem.bgimagename)
+
+          return new project(dataitem.id, dataitem.title, new Date(dataitem.created), logo.publicUrl, background.publicUrl, !dataIgnore.includes(dataitem.id))
+        }));
       }
     }
     fetchData();
