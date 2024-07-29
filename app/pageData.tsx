@@ -23,7 +23,7 @@ function hashTag({tag} : {tag: string}) {
 
 export default function PageData({ projects, activeProject }: { projects: project[], activeProject: number }) {
     const supabase = createClient();
-    var [output, setOutput] = useState([new outputItem(0, <p key={"data.text"} style={{ color: "white", fontSize: "1rem" }}>Loading...</p>)]);
+    var [output, setOutput] = useState([new outputItem(0, <p key={"data.text"} style={{ color: "white", fontSize: "1rem" }}>Loading...<br />Ok if you've had time to read this message, then this isnt loading.<br/>This means the database needs waking up, please email <a href="mailto:thomaslower9@gmail.com">Me</a></p>)]);
     var [loaded, setLoaded] = useState(false);
     var [tagOutput, setTagOutput] = useState([""]);
     useEffect(() => {
